@@ -41,7 +41,7 @@ namespace NzWalks.Controllers
             var dataDomain = await _walkRepository.GetByIdAsync(id);
             if (dataDomain == null)
             {
-
+         
                 return NotFound();
             }
             return Ok(_mapper.Map<WalkDto>(dataDomain));

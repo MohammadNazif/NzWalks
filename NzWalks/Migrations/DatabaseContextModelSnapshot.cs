@@ -51,7 +51,7 @@ namespace NzWalks.Migrations
                         {
                             Id = new Guid("f808ddcd-b5e5-4d80-b732-1ca523e48434"),
                             Name = "Hard"
-                        });
+                });
                 });
 
             modelBuilder.Entity("NzWalks.Models.DomainModel.Region", b =>
