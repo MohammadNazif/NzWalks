@@ -32,11 +32,13 @@ namespace NzWalks.Controllers
                 return Ok(_mapper.Map<WalkDto>(walkDomain));
           
         }
-        //Get : /api/walks?filterOn=Name&filterQuery=Track
+        //Get : /api/walks?filterOn=Name&filterQuery=Track&sortBy=Name&isAscending=true
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? filterOn , [FromQuery] string? filterQuery)
+        public async Task<IActionResult> GetAll([FromQuery] string? filterOn , [FromQuery] string? filterQuery,
+            [FromQuery] string? sortBy, [FromQuery] bool? isAscendng ,
+            [FromQuery] int pagesize = 1000,[FromQuery] int pageNumber=1)
         {
-            var walksDomain = await _walkRepository.GetAllAsync(filterOn,filterQuery);
+            var walksDomain = await _walkRepository.GetAllAsync(filterOn,filterQuery,sortBy,isAscendng??true,pagesize,pageNumber);
             return Ok(_mapper.Map<List<WalkDto>>(walksDomain));
         }
         [HttpGet]
