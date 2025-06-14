@@ -2,7 +2,7 @@
 
 namespace NzWalks.Models.DTOs
 {
-    public class AddWalkDto
+    public class updatewalkDto
     {
         [Required]
         [MaxLength(3, ErrorMessage = "Name should be of Max 100 length")]
@@ -12,7 +12,7 @@ namespace NzWalks.Models.DTOs
         [MaxLength(1000, ErrorMessage = "Description should be of Max 1000 length")]
         public string Description { get; set; }
         [Required]
-        [Range(0,50)]
+        [Range(0, 50)]
         public int LengthInKm { get; set; }
 
         public string? ImageUrl { get; set; }
@@ -20,5 +20,6 @@ namespace NzWalks.Models.DTOs
         public Guid RegionId { get; set; }
         [Required]
         public Guid DifficultyId { get; set; }
+
     }
 }
