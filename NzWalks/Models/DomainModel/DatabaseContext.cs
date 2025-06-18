@@ -4,7 +4,7 @@ namespace NzWalks.Models.DomainModel
 {
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext(DbContextOptions options) : base(options) 
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) 
         { 
         }
 

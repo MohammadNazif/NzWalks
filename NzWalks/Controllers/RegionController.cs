@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace NzWalks.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
     public class RegionController : ControllerBase
     {
         private readonly DatabaseContext _db;
@@ -22,6 +24,7 @@ namespace NzWalks.Controllers
             _repoRegion = repoRegion;
         }
         [HttpGet]
+        [Authorize(Roles ="Reader")]
         public async Task<IActionResult> GetAll()
         {
             var regionsdomain = await _repoRegion.GetAllAsync();
@@ -41,6 +44,7 @@ namespace NzWalks.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles ="Reader")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var regionsdomain = await _repoRegion.GetByIdAsync(id);
@@ -62,6 +66,7 @@ namespace NzWalks.Controllers
         }
 
         [HttpDelete("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             await _repoRegion.DeleteAsync(id);
@@ -70,6 +75,7 @@ namespace NzWalks.Controllers
         }
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] addRequestRegionDto requetsRegionDto)
         {
           //convert dto to domain for saving to database
@@ -95,6 +101,7 @@ namespace NzWalks.Controllers
 
         [HttpPut("{id:Guid}")]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] updateRequestRegionDto updateDto)
         {
             
